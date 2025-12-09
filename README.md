@@ -291,8 +291,6 @@ tests/
 
 🧩 Architecture Overview (Mermaid Diagram)
 
-```mermaild
-
 flowchart LR
     %% Client side
     U[QA Engineer / User\n(Postman, Browser, CI)] -->
@@ -334,7 +332,7 @@ flowchart LR
 
     U -. triggers tests .-> CI
 
-```
+
 
 🎯 Why This Project Is Useful
 
