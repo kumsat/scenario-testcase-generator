@@ -289,49 +289,13 @@ tests/
 ```
 
 
-## 🧩 Architecture Overview (Mermaid Diagram)
-
 ```mermaid
 flowchart LR
-    %% Client side
-    U[QA Engineer / User\n(Postman, Browser, CI)] -->
-
-    %% API layer
-    A[FastAPI App\nsrc/main.py]
-
-    subgraph API_Layer[API Layer]
-        A --> |/generate-by-scenario\n(ScenarioRequest)| B[Scenario Generator\nsrc/generators/scenario_generator.py]
-        A --> |/generate-combinations\n(CombinationRequest)| C[Combinational Generator\nsrc/generators/combinational_generator.py]
-        A --> |/download-markdown\n(query params)| D[Markdown Export\n(PlainTextResponse)]
-    end
-
-    %% Scenario generator path
-    subgraph Scenario_Engine[Scenario-based Engine]
-        B --> M1[Scenario Models\nScenarioRequest,\nScenarioResponse,\nTestCase]
-        B --> O1[(Scenario-based\nTest Cases\n(happy, negative,\nboundary))]
-    end
-
-    %% Combinational generator path
-    subgraph Combination_Engine[Combinational Engine]
-        C --> L[Automotive Scenario Library\nsrc/generators/scenario_library.py]
-        L --> |auto-detect fields\n(HMI, BT, Audio,\nNavigation, CAN, OTA)| C
-        C --> M2[Combination Models\nCombinationRequest,\nCombinationResponse]
-        C --> O2[(Combinational\nTest Cases\n+ total_combinations)]
-    end
-
-    %% Outputs
-    O1 --> A
-    O2 --> A
-    A --> |JSON response\n(test cases + steps + expected)| U
-    D --> |Markdown (.md) file\ndownload| U
-
-    %% Tests & CI
-    subgraph Quality[Tests & CI Pipeline]
-        T[pytest tests\n/tests] --> A
-        CI[GitHub Actions\nCI workflow] --> T
-    end
-
-    U -. triggers tests .-> CI
+    A[Client] --> B[FastAPI App]
+    B --> C[Scenario Generator]
+    B --> D[Combinational Generator]
+    C --> E[(Scenario-based Test Cases)]
+    D --> F[(Combinational Test Cases)]
 ```
 
 
