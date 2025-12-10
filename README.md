@@ -289,8 +289,9 @@ tests/
 ```
 
 
-🧩 Architecture Overview (Mermaid Diagram)
+## 🧩 Architecture Overview (Mermaid Diagram)
 
+```mermaid
 flowchart LR
     %% Client side
     U[QA Engineer / User\n(Postman, Browser, CI)] -->
@@ -307,7 +308,7 @@ flowchart LR
     %% Scenario generator path
     subgraph Scenario_Engine[Scenario-based Engine]
         B --> M1[Scenario Models\nScenarioRequest,\nScenarioResponse,\nTestCase]
-        B --> O1[(Scenario-based\nTest Cases\n(happy, negative,\nboundary, etc.))]
+        B --> O1[(Scenario-based\nTest Cases\n(happy, negative,\nboundary))]
     end
 
     %% Combinational generator path
@@ -331,6 +332,7 @@ flowchart LR
     end
 
     U -. triggers tests .-> CI
+```
 
 
 
